@@ -1,6 +1,6 @@
-#Sun, 09 Jul 2017 21:47:12 -0300
+#Thu, 27 Jul 2017 23:06:53 -0300
 
 info.app.version=0.1
 info.app.name=VecindApp
-grails.env=development
+grails.env=test
 info.app.grailsVersion=3.2.7

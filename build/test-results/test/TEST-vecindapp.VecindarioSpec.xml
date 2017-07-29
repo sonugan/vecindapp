@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="vecindapp.VecindarioSpec" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-07-29T03:32:39" hostname="gaston" time="1.155">
+  <properties/>
+  <testcase name="test vecindario valido" classname="vecindapp.VecindarioSpec" time="1.079"/>
+  <testcase name="test vecindario sin nombre" classname="vecindapp.VecindarioSpec" time="0.058"/>
+  <testcase name="test vecindario con nombre vacio" classname="vecindapp.VecindarioSpec" time="0.012"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

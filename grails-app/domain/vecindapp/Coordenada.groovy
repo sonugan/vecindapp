@@ -5,7 +5,7 @@ class Coordenada {
   float longitud
 
   static constraints = {
-      latitud nullable: false
-      longitud nullable: false
+      latitud min: -90f, max: 90f
+      longitud min: 0f, max: 180f
   }
 }

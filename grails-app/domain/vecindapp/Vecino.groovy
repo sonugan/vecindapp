@@ -10,6 +10,6 @@ class Vecino {
         nombre nullable: false, blank:false
         apellido nullable: false, blank:false
         usuario nullable: false, blank:false
-        fechaNacimiento nullable: false, min: new Date()
+        fechaNacimiento nullable: false
     }
 }
