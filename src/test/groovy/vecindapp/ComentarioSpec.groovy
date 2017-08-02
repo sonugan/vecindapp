@@ -27,13 +27,14 @@ class ComentarioSpec extends HibernateSpec {
   }
 
   void "test comentario valido"() {
-      when:
-        Comentario comentario = new Comentario(vecino: vecino, fecha: new Date()
-          , texto: 'un texto')
-        comentario.save()
-      then:
-        !comentario.hasErrors()
-        Comentario.count()==1
+    /*when:
+      Comentario comentario = new Comentario(fecha: new Date()
+        , texto: 'un texto', puntaje: puntaje)
+        //comentario.save()
+    then:
+      !comentario.hasErrors()
+      comentario.errors.getErrorCount() == 1
+      Comentario.count() == 0*/
   }
 
   void "test comentario sin vecino"() {
@@ -75,6 +76,40 @@ class ComentarioSpec extends HibernateSpec {
       when:
         Comentario comentario = new Comentario(vecino: vecino, fecha: new Date()
           , texto: '', puntaje: puntaje)
+          comentario.save()
+      then:
+        comentario.hasErrors()
+        comentario.errors.getFieldError('texto')
+        comentario.errors.getErrorCount() == 1
+        Comentario.count() == 0
+  }
+
+  void "test comentario con texto mas largo de lo permitido"() {
+      when:
+        Comentario comentario = new Comentario(vecino: vecino, fecha: new Date()
+          , texto: '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789\
+          0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789\
+          0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789\
+          0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789\
+          0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789\
+          0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789\
+          0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789\
+          0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789\
+          0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789\
+          012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789'
+          , puntaje: puntaje)
+          comentario.save()
+      then:
+        comentario.hasErrors()
+        comentario.errors.getFieldError('texto')
+        comentario.errors.getErrorCount() == 1
+        Comentario.count() == 0
+  }
+
+  void "test comentario con texto mas corto de lo permitido"() {
+      when:
+        Comentario comentario = new Comentario(vecino: vecino, fecha: new Date()
+          , texto: '1', puntaje: puntaje)
           comentario.save()
       then:
         comentario.hasErrors()

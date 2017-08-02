@@ -9,7 +9,7 @@ class Comentario {
     static constraints = {
         vecino nullable: false
         fecha nullable: false
-        texto nullable: false, blank: false
+        texto nullable: false, blank: false, minSize: 2, maxSize: 1000
         //puntaje nullable: false
     }
 }

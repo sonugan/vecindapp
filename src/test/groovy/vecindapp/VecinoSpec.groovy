@@ -55,6 +55,34 @@ class VecinoSpec extends HibernateSpec {
           Vecino.count() == 0
     }
 
+    void "test vecino con nombre mas largo de lo permitido"() {
+        when:
+          Vecino vecino = new Vecino(apellido: 'Paez'
+            , nombre: '01234567890123456789012345678901234567891'
+            , usuario:'Pepe', fechaNacimiento: new Date()
+            , direccion: direccion)
+          vecino.save()
+        then:
+          vecino.hasErrors()
+          vecino.errors.getFieldError('nombre')
+          vecino.errors.getErrorCount() == 1
+          Vecino.count() == 0
+    }
+
+    void "test vecino con nombre mas corto de lo permitido"() {
+        when:
+          Vecino vecino = new Vecino(apellido: 'Paez'
+            , nombre: '012'
+            , usuario:'Pepe', fechaNacimiento: new Date()
+            , direccion: direccion)
+          vecino.save()
+        then:
+          vecino.hasErrors()
+          vecino.errors.getFieldError('nombre')
+          vecino.errors.getErrorCount() == 1
+          Vecino.count() == 0
+    }
+
     void "test vecino sin apellido"() {
         when:
           Vecino vecino = new Vecino(nombre: 'Juan', usuario:'Pepe', fechaNacimiento: new Date()
@@ -75,6 +103,84 @@ class VecinoSpec extends HibernateSpec {
         then:
           vecino.hasErrors()
           vecino.errors.getFieldError('apellido')
+          vecino.errors.getErrorCount() == 1
+          Vecino.count() == 0
+    }
+
+    void "test vecino con apellido mas largo de lo permitido"() {
+        when:
+          Vecino vecino = new Vecino(nombre: 'Juan'
+            , apellido: '01234567890123456789012345678901234567891'
+            , usuario:'Pepe', fechaNacimiento: new Date()
+            , direccion: direccion)
+          vecino.save()
+        then:
+          vecino.hasErrors()
+          vecino.errors.getFieldError('apellido')
+          vecino.errors.getErrorCount() == 1
+          Vecino.count() == 0
+    }
+
+    void "test vecino con apellido mas corto de lo permitido"() {
+        when:
+          Vecino vecino = new Vecino(nombre: 'Juan'
+            , apellido: '012'
+            , usuario:'Pepe', fechaNacimiento: new Date()
+            , direccion: direccion)
+          vecino.save()
+        then:
+          vecino.hasErrors()
+          vecino.errors.getFieldError('apellido')
+          vecino.errors.getErrorCount() == 1
+          Vecino.count() == 0
+    }
+
+    void "test vecino sin usuario"() {
+        when:
+          Vecino vecino = new Vecino(nombre: 'Juan', apellido:'Paez', fechaNacimiento: new Date()
+            , direccion: direccion)
+          vecino.save()
+        then:
+          vecino.hasErrors()
+          vecino.errors.getFieldError('usuario')
+          vecino.errors.getErrorCount() == 1
+          Vecino.count() == 0
+    }
+
+    void "test vecino con usuario vacio"() {
+        when:
+          Vecino vecino = new Vecino(nombre: 'Juan', apellido: 'Paez', usuario:'', fechaNacimiento: new Date()
+            , direccion: direccion)
+          vecino.save()
+        then:
+          vecino.hasErrors()
+          vecino.errors.getFieldError('usuario')
+          vecino.errors.getErrorCount() == 1
+          Vecino.count() == 0
+    }
+
+    void "test vecino con usuario mas largo de lo permitido"() {
+        when:
+          Vecino vecino = new Vecino(nombre: 'Juan', apellido: 'Paez'
+            , usuario:'12345678901', fechaNacimiento: new Date()
+            , direccion: direccion)
+          vecino.save()
+        then:
+          vecino.hasErrors()
+          vecino.errors.getFieldError('usuario')
+          vecino.errors.getErrorCount() == 1
+          Vecino.count() == 0
+    }
+
+    void "test vecino con usuario mas corto de lo permitido"() {
+        when:
+          Vecino vecino = new Vecino(nombre: 'Juan'
+            , apellido: 'Paez', usuario:'012', fechaNacimiento: new Date()
+            , direccion: direccion)
+          vecino.save()
+        then:
+          vecino.hasErrors()
+          vecino.errors.getFieldError('usuario')
           vecino.errors.getErrorCount() == 1
           Vecino.count() == 0
     }
